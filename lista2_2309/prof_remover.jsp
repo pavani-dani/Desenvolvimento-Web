@@ -20,7 +20,7 @@
 <body>
     <div class="container">
         <h1>Remover Professor</h1>
-        <form action="professor_remover.jsp" method="POST">
+        <form action="prof_remover.jsp" method="POST">
             <label for="nome">Nome do Professor:</label>
             <input type="text" id="nome" name="nome" required><br><br>
             <input type="submit" value="Remover">
