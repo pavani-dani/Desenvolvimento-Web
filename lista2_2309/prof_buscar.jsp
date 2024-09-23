@@ -22,7 +22,7 @@
 <body>
     <div class="container">
         <h1>Buscar Professor</h1>
-        <form action="professor_buscar.jsp" method="POST">
+        <form action="prof_buscar.jsp" method="POST">
             <label for="nome">Nome do Professor:</label>
             <input type="text" id="nome" name="nome" required><br><br>
             <input type="submit" value="Buscar">
@@ -30,7 +30,7 @@
         <% if (nomeBuscar != null) { %>
             <p><%= encontrado ? "Professor encontrado." : "Professor não encontrado." %></p>
         <% } %>
-        <a href="professor_menu.jsp">Voltar ao Menu</a>
+        <a href="prof_menu.jsp">Voltar ao Menu</a>
     </div>
 </body>
 </html>

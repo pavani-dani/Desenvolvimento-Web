@@ -25,7 +25,7 @@
             <input type="text" id="nome" name="nome" required><br><br>
             <input type="submit" value="Remover">
         </form>
-        <a href="professor_menu.jsp">Voltar ao Menu</a>
+        <a href="prof_menu.jsp">Voltar ao Menu</a>
     </div>
 </body>
 </html>

@@ -25,7 +25,7 @@
 <body>
     <div class="container">
         <h1>Lista de Professores</h1>
-        <a href="professor_menu.jsp">Voltar ao Menu</a>
+        <a href="prof_menu.jsp">Voltar ao Menu</a>
     </div>
 </body>
 </html>
