@@ -3,16 +3,16 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <title>Lista de Contatos</title>
+    <title>Lista de Amigos</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="container">
-        <h1>Lista de contatos</h1>
+        <h1>Lista de amigos</h1>
         <%
             try {
                 Class.forName("com.mysql.jdbc.Driver");
-                Connection conn = DriverManager.getConnection("jdbc:mysql://localhost/contatos", "root", "");
+                Connection conn = DriverManager.getConnection("jdbc:mysql://localhost/amigos", "root", "");
 
                 Statement stmt = conn.createStatement();
                 ResultSet rs = stmt.executeQuery("SELECT nome, email, telefone, data_aniversario FROM contatos");

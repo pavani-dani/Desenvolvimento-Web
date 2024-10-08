@@ -22,7 +22,7 @@
             if (nome != null && !nome.isEmpty()) {
                 try {
                     Class.forName("com.mysql.jdbc.Driver");
-                    Connection conn = DriverManager.getConnection("jdbc:mysql://localhost/contatos", "root", "");
+                    Connection conn = DriverManager.getConnection("jdbc:mysql://localhost/amigos", "root", "");
                     
                     String sql = "SELECT * FROM contatos WHERE nome LIKE ?";
                     PreparedStatement stmt = conn.prepareStatement(sql);

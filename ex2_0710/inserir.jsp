@@ -26,7 +26,7 @@
                 try {
                     Class.forName("com.mysql.jdbc.Driver");
 
-                    Connection conn = DriverManager.getConnection("jdbc:mysql://localhost/contatos", "root", "");
+                    Connection conn = DriverManager.getConnection("jdbc:mysql://localhost/amigos", "root", "");
 
                     String sql = "INSERT INTO contatos (nome, email, telefone, data_aniversario) VALUES (?, ?, ?, ?)";
                     PreparedStatement stmt = conn.prepareStatement(sql);

@@ -23,7 +23,7 @@
                 int mes = Integer.parseInt(mesParam);
                 try {
                     Class.forName("com.mysql.jdbc.Driver");
-                    Connection conn = DriverManager.getConnection("jdbc:mysql://localhost/contatos", "root", "");
+                    Connection conn = DriverManager.getConnection("jdbc:mysql://localhost/amigos", "root", "");
                     
                     String sql = "SELECT * FROM contatos WHERE MONTH(data_aniversario) = ? ORDER BY DAY(data_aniversario)";
                     PreparedStatement stmt = conn.prepareStatement(sql);

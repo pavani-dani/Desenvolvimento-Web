@@ -1,0 +1,17 @@
+CREATE TABLE login (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    email VARCHAR(100) NOT NULL UNIQUE,  
+    senha VARCHAR(100) NOT NULL,
+    nome VARCHAR(100) NOT NULL,
+    foto VARCHAR(255) DEFAULT   
+);
+
+CREATE TABLE amigos (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    nome VARCHAR(100) NOT NULL,
+    telefone VARCHAR(15) NOT NULL,
+    endereco VARCHAR(255) NOT NULL,
+    dataAniversario DATE NOT NULL,
+    login VARCHAR(100) NOT NULL,  
+    FOREIGN KEY (login) REFERENCES login(email)  
+);
