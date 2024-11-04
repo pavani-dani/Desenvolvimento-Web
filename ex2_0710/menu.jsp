@@ -11,16 +11,16 @@
         <h1>CRUD Amigos</h1>
         
         <div class="user-info">
-            <h3><%= session.getAttribute("foto") %></h3>
+            <h2>Seja bem-vindo!</h2>
             <p>Esta é a <%= (session.getAttribute("vezes") != null ? session.getAttribute("vezes") : 1) %>ª vez que você acessa esta página.</p>
-            <h2>Seja bem-vindo, <%= session.getAttribute("nome") %>!</h2>
         </div>
 
         <div class="menu">
-            <a href="listar.jsp">Listar</a>
+            <a href="listar.jsp">Listar contatos</a>
             <a href="consultar_nome.jsp">Consultar por Nome</a>
-            <a href="consultar_mes.jsp">Consultar por Mês de Aniversário</a>
-            <a href="formalterar.jsp">Alterar dados</a>
+            <a href="consultar_mes.jsp">Consultar por Mês de Aniversário</a><br>
+            <a href="inserir.jsp">Inserir</a>
+            <a href="selecionarAmg.jsp">Alterar</a>
             <a href="excluir.jsp">Excluir</a>
             <a href="sair.jsp">Sair</a>
         </div>

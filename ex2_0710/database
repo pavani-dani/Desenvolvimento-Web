@@ -1,9 +1,9 @@
 CREATE TABLE login (
     id INT PRIMARY KEY AUTO_INCREMENT,
-    email VARCHAR(100) NOT NULL UNIQUE,  
-    senha VARCHAR(100) NOT NULL,
+    email VARCHAR(50) NOT NULL UNIQUE,   
+    senha VARCHAR(50) NOT NULL, 
     nome VARCHAR(100) NOT NULL,
-    foto VARCHAR(255) DEFAULT   
+    foto VARCHAR(255) DEFAULT ''
 );
 
 CREATE TABLE amigos (
@@ -12,6 +12,9 @@ CREATE TABLE amigos (
     telefone VARCHAR(15) NOT NULL,
     endereco VARCHAR(255) NOT NULL,
     dataAniversario DATE NOT NULL,
-    login VARCHAR(100) NOT NULL,  
+    login VARCHAR(50) NOT NULL,   
     FOREIGN KEY (login) REFERENCES login(email)  
 );
+
+INSERT INTO login (email, senha, nome, foto) 
+VALUES ('example@email.com', '123456', 'Name', 'foto.jpg');

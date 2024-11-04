@@ -1,5 +1,8 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="java.sql.*" %>
+<%@ page import="java.text.SimpleDateFormat" %>
+<%@ page import="java.util.Date" %>
+<%@ include file="conectar.jsp" %> 
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
@@ -11,24 +14,23 @@
         <h1>Lista de amigos</h1>
         <%
             try {
-                Class.forName("com.mysql.jdbc.Driver");
-                Connection conn = DriverManager.getConnection("jdbc:mysql://localhost/amigos", "root", "");
-
-                Statement stmt = conn.createStatement();
-                ResultSet rs = stmt.executeQuery("SELECT nome, email, telefone, data_aniversario FROM contatos");
+                Statement stmt = conexao.createStatement();
+                ResultSet rs = stmt.executeQuery("SELECT nome, login, telefone, dataAniversario FROM amigos");
 
                 while (rs.next()) {
                     String nome = rs.getString("nome");
-                    String email = rs.getString("email");
+                    String login = rs.getString("login"); 
                     String telefone = rs.getString("telefone");
-                    Date aniversario = rs.getDate("data_aniversario");
+                    Date dataAniversario = rs.getDate("dataAniversario"); 
 
-                    out.println("<p>" + nome + " - " + email + " - " + telefone + " - " + aniversario + "</p>");
+                    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+                    String dataAniversarioFormatada = dataAniversario != null ? sdf.format(dataAniversario) : "Data não disponível";
+
+                    out.println("<p>" + nome + " - " + login + " - " + telefone + " - " + dataAniversarioFormatada + "</p>");
                 }
 
                 rs.close();
                 stmt.close();
-                conn.close();
             } catch (Exception e) {
                 out.println("<p>Erro: " + e.getMessage() + "</p>");
                 e.printStackTrace();

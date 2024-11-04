@@ -1,5 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="java.sql.*" %>
+<%@ include file="conectar.jsp" %> 
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -22,11 +23,8 @@
             if (mesParam != null && !mesParam.isEmpty()) {
                 int mes = Integer.parseInt(mesParam);
                 try {
-                    Class.forName("com.mysql.jdbc.Driver");
-                    Connection conn = DriverManager.getConnection("jdbc:mysql://localhost/amigos", "root", "");
-                    
-                    String sql = "SELECT * FROM contatos WHERE MONTH(data_aniversario) = ? ORDER BY DAY(data_aniversario)";
-                    PreparedStatement stmt = conn.prepareStatement(sql);
+                    String sql = "SELECT * FROM amigos WHERE MONTH(dataAniversario) = ? ORDER BY DAY(dataAniversario)";
+                    PreparedStatement stmt = conexao.prepareStatement(sql);
                     stmt.setInt(1, mes);
                     
                     ResultSet rs = stmt.executeQuery();
@@ -38,7 +36,7 @@
                         do {
                             out.println("<tr>");
                             out.println("<td>" + rs.getString("nome") + "</td>");
-                            out.println("<td>" + rs.getDate("data_aniversario") + "</td>");
+                            out.println("<td>" + rs.getDate("dataAniversario") + "</td>");
                             out.println("</tr>");
                         } while (rs.next());
                         out.println("</table>");
@@ -48,7 +46,7 @@
                     
                     rs.close();
                     stmt.close();
-                    conn.close();
+                    conexao.close();
                 } catch (Exception e) {
                     out.println("<p>Erro: " + e.getMessage() + "</p>");
                     e.printStackTrace();

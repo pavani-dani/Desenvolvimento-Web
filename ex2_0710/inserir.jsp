@@ -1,5 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="java.sql.*" %>
+<%@ include file="conectar.jsp" %> 
 <html>
 <head>
     <title>Inserir Contato</title>
@@ -10,41 +11,50 @@
         <h1>Inserir contato</h1>
         <form method="POST">
             <input type="text" name="nome" placeholder="Nome" required><br>
-            <input type="text" name="email" placeholder="E-mail"><br>
+            <input type="text" name="login" placeholder="E-mail" required><br>
             <input type="text" name="telefone" placeholder="Telefone"><br>
-            <input type="date" name="data_aniversario" placeholder="Data de Aniversário"><br>
-            <input type="submit" value="Inserir">
+            <input type="text" name="endereco" placeholder="Endereço" required><br>
+            <input type="date" name="dataAniversario" placeholder="Data de Aniversário"><br>
+            <button type="submit">Inserir</button>
         </form>
         
         <%
             String nome = request.getParameter("nome");
-            String email = request.getParameter("email");
+            String login = request.getParameter("login"); 
             String telefone = request.getParameter("telefone");
-            String dataAniversario = request.getParameter("data_aniversario");
+            String endereco = request.getParameter("endereco");
+            String dataAniversario = request.getParameter("dataAniversario");
 
-            if (nome != null && !nome.isEmpty()) {
+            if (nome != null && !nome.isEmpty() && login != null && !login.isEmpty()) { 
                 try {
-                    Class.forName("com.mysql.jdbc.Driver");
+                    String checkEmailSql = "SELECT * FROM login WHERE email = ?";
+                    PreparedStatement checkStmt = conexao.prepareStatement(checkEmailSql);
+                    checkStmt.setString(1, login);
+                    ResultSet rs = checkStmt.executeQuery();
 
-                    Connection conn = DriverManager.getConnection("jdbc:mysql://localhost/amigos", "root", "");
+                    if (rs.next()) { 
+                        String sql = "INSERT INTO amigos (nome, login, telefone, endereco, dataAniversario) VALUES (?, ?, ?, ?, ?)"; 
+                        PreparedStatement stmt = conexao.prepareStatement(sql);
+                        stmt.setString(1, nome);
+                        stmt.setString(2, login);
+                        stmt.setString(3, telefone);
+                        stmt.setString(4, endereco);
+                        stmt.setString(5, dataAniversario);
 
-                    String sql = "INSERT INTO contatos (nome, email, telefone, data_aniversario) VALUES (?, ?, ?, ?)";
-                    PreparedStatement stmt = conn.prepareStatement(sql);
-                    stmt.setString(1, nome);
-                    stmt.setString(2, email);
-                    stmt.setString(3, telefone);
-                    stmt.setString(4, dataAniversario);
+                        int linhasAfetadas = stmt.executeUpdate();
 
-                    int linhasAfetadas = stmt.executeUpdate();
+                        if (linhasAfetadas > 0) {
+                            out.println("<p>Contato inserido com sucesso!</p>");
+                        } else {
+                            out.println("<p>Falha ao inserir o contato.</p>");
+                        }
 
-                    if (linhasAfetadas > 0) {
-                        out.println("<p>Contato inserido com sucesso!</p>");
+                        stmt.close();
                     } else {
-                        out.println("<p>Falha ao inserir o contato.</p>");
+                        out.println("<p>Email não encontrado na tabela de login.</p>");
                     }
 
-                    stmt.close();
-                    conn.close();
+                    checkStmt.close();
                 } catch (Exception e) {
                     out.println("<p>Erro: " + e.getMessage() + "</p>");
                     e.printStackTrace();
